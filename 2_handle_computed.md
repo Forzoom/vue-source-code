@@ -1,4 +1,4 @@
-到此为止，基本上data相关的处理流程就已经完成了，在这里有被我们所跳过的props的定义，我们现在来看一下
+到此为止，基本上data相关的处理流程就已经完成了，在这里有被所跳过的props的定义，现在来看一下。
 
 ```javascript
 // src/core/instance/state.js
@@ -23,13 +23,14 @@ function initProps(vm: Component, propsOptions: Object) {
       proxy(vm, `_props`, key)
     }
   }
-  toggleObserving(true)
+  // ..
 }
 ```
 
-基本上对于props的定义，也是简单地使用defineReactive进行处理。
+#### 结论：
+基本上对于props的处理，就是循环调用defineReactive函数进行处理。
 
-关于计算属性computed的定义，让我们来看initComputed，也是针对于每个computed中的属性进行处理，其中比较关键的是new Watcher，在Watcher中主要执行的pushTarget getter() popTarget 这三个函数。我们来针对这段代码进行处理
+### 处理Computed
 
 ```javascript
 new Vue({
@@ -46,6 +47,9 @@ new Vue({
   },
 });
 ```
+
+关于computed被如何处理，也用上面一个简单的代码片段来说明。
+让我们来看initComputed，也是针对于每个computed中的属性进行处理，其中比较关键的是new Watcher，在Watcher中主要执行的pushTarget getter() popTarget 这三个函数。我们来针对这段代码进行处理
 
 当执行pushTarget的时候，会将d1所对应的Watcher放在Dep.target的位置
 

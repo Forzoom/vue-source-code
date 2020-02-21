@@ -1,0 +1,1 @@
+1. [ ] componentOptions中的内容在什么时候能够正常使用，或者说options中的内容是在什么出现

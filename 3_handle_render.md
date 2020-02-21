@@ -1,0 +1,15 @@
+为什么当数据发生变化的时候，页面会重新渲染
+
+1. mountComponent中的Watcher
+2. 将template修改成render，如果可以的话，skeleton希望能够修改成优先编译的情况，而不是在需要的时候再进行编译
+
+mount函数在platform中实际生成
+在render.js中调用了renderProxy.render函数
+render中传递的是$createElement
+$createElement调用了createElement，调用_createElement
+根据情况调用createComponent
+
+因为我们拿到的是vnode，所以可以寻找componentOptions
+目前largeList只支持组件，因为需要处理heightChange事件
+
+在create-component中有vnode的内部hook init
